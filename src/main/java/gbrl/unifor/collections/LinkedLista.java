@@ -7,6 +7,7 @@ import java.util.ListIterator;
 public class LinkedLista<E> implements Lista<E> {
     private Node primeiro;
     private Node ultimo;
+    private int count = 0;
 
     // TODO
     @Override
@@ -44,10 +45,19 @@ public class LinkedLista<E> implements Lista<E> {
         return null;
     }
 
-    // TODO 
     @Override
     public boolean add(E e) {
-        return false;
+        Node novo = new Node(e);
+
+        if (primeiro == null) primeiro = novo;
+        else {
+            ultimo.proximo = novo;
+            novo.anterior = ultimo;
+        }
+
+        ultimo = novo;
+        count++;
+        return true;
     }
 
     // TODO 
@@ -151,10 +161,10 @@ public class LinkedLista<E> implements Lista<E> {
         Node atual = primeiro;
         String str = "[";
         while (atual != null) {
-            str += atual.item + ", ";
+            str += (atual.proximo == null) ? atual.item : atual.item + ", ";
             atual = atual.proximo;
         }
-        return str;
+        return str + "]";
     }
 
     private static class Node<E> {
@@ -166,6 +176,10 @@ public class LinkedLista<E> implements Lista<E> {
             this.item = item;
             this.anterior = anterior;
             this.proximo = proximo;
+        }
+
+        Node(E item) {
+            this.item = item;
         }
     }
 }

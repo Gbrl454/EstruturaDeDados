@@ -9,10 +9,9 @@ public class LinkedLista<E> implements Lista<E> {
     private Node ultimo;
     private int count = 0;
 
-    // TODO
     @Override
     public int size() {
-        return 0;
+        return count;
     }
 
     // TODO 

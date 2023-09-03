@@ -3,9 +3,8 @@ package gbrl.unifor.collections;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
-public class ArrayLista<E> implements Lista<E> {
+public class ArrayLista<E> extends AbstractLista<E> {
     private int initialCapacity;
-    private int count = 0;
     private E[] v;
 
     public ArrayLista() {
@@ -41,38 +40,10 @@ public class ArrayLista<E> implements Lista<E> {
     }
 
     @Override
-    public int size() {
-        return count;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return count == 0;
-    }
-
-    @Override
     public boolean contains(Object o) {
         for (int i = 0; i < count; i++)
             if (v[i].equals(o)) return true;
         return false;
-    }
-
-    // TODO
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    // TODO
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    // TODO
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return null;
     }
 
     @Override
@@ -87,12 +58,6 @@ public class ArrayLista<E> implements Lista<E> {
             return false;
         remove(indexOf(o));
         return true;
-    }
-
-    // TODO
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
     }
 
     @Override
@@ -119,12 +84,6 @@ public class ArrayLista<E> implements Lista<E> {
         return true;
     }
 
-    // TODO
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
     @Override
     public void clear() {
         v = (E[]) new Object[this.initialCapacity];
@@ -136,12 +95,6 @@ public class ArrayLista<E> implements Lista<E> {
         if (index < 0 || index >= count)
             throw new IndexOutOfBoundsException("Índice " + index + " fora dos limites para comprimento " + count);
         return v[index];
-    }
-
-    // TODO
-    @Override
-    public E set(int index, E element) {
-        return null;
     }
 
     @Override
@@ -179,30 +132,6 @@ public class ArrayLista<E> implements Lista<E> {
         for (int i = 0; i < count; i++)
             if (v[i].equals(o)) return i;
         return -1;
-    }
-
-    // TODO
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    // TODO
-    @Override
-    public ListIterator<E> listIterator() {
-        return null;
-    }
-
-    // TODO
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        return null;
-    }
-
-    // TODO
-    @Override
-    public Lista<E> subList(int fromIndex, int toIndex) {
-        return null;
     }
 
     @Override

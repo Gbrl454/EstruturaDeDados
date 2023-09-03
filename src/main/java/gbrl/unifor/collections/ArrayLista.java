@@ -1,16 +1,38 @@
 package gbrl.unifor.collections;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 @SuppressWarnings("unchecked")
 public class ArrayLista<E> implements Lista<E> {
+    private int initialCapacity;
     private int count = 0;
     private E[] v;
 
     public ArrayLista() {
+        novo();
+    }
+
+    public ArrayLista(int initialCapacity) {
+        if (initialCapacity > 0)
+            this.initialCapacity = initialCapacity;
+        else if (initialCapacity == 0)
+            this.initialCapacity = 10;
+        else
+            throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
+
+        clear();
+    }
+
+    public ArrayLista(Collection<? extends E> c) {
+        Object[] objs = c.toArray();
+        if ((count = objs.length) != 0)
+            v = (c.getClass() == ArrayList.class) ? ((E[]) objs) : ((E[]) Arrays.copyOf(objs, count, Object[].class));
+        else
+            novo();
+    }
+
+    private void novo() {
+        this.initialCapacity = 10;
         clear();
     }
 
@@ -29,56 +51,83 @@ public class ArrayLista<E> implements Lista<E> {
     }
 
     @Override
-    public boolean contains(E e) {
-        for (int i = 0; i < count; i++) {
-            if (v[i].equals(e)) return true;
-        }
+    public boolean contains(Object o) {
+        for (int i = 0; i < count; i++)
+            if (v[i].equals(o)) return true;
         return false;
     }
 
     // TODO
     @Override
-    public Iterator iterator() {
+    public Iterator<E> iterator() {
         return null;
     }
 
     // TODO
     @Override
-    public E[] toArray() {
-        return null;
-    }
-
-    @Override
-    public void add(E e) {
-        if (count == v.length) {
-            E[] vAux = plusArray();
-            System.arraycopy(v, 0, vAux, 0, v.length);
-            v = vAux;
-        }
-        v[count] = e;
-        count++;
-    }
-
-    @Override
-    public void remove(E e) {
-        remove(indexOf(e));
+    public Object[] toArray() {
+        return new Object[0];
     }
 
     // TODO
     @Override
-    public boolean addAll(Collection c) {
+    public <T> T[] toArray(T[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean add(E e) {
+        add(count, e);
+        return true;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        if (!contains(o))
+            return false;
+        remove(indexOf(o));
+        return true;
+    }
+
+    // TODO
+    @Override
+    public boolean containsAll(Collection<?> c) {
         return false;
     }
 
+    @Override
+    public boolean addAll(Collection<? extends E> c) {
+        addAll(count, c);
+        return true;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        ArrayLista<E> lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < lista.size(); i++)
+            add(index + i, lista.get(i));
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        ArrayLista lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < c.size(); i++)
+            remove(lista.get(i));
+        return true;
+    }
+
     // TODO
     @Override
-    public boolean addAll(int index, Collection c) {
+    public boolean retainAll(Collection<?> c) {
         return false;
     }
 
     @Override
     public void clear() {
-        v = (E[]) new Object[10];
+        v = (E[]) new Object[this.initialCapacity];
         count = 0;
     }
 
@@ -113,71 +162,46 @@ public class ArrayLista<E> implements Lista<E> {
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index > count)
             return null;
 
-        Object o = get(index);
-        for (int i = index; i < count; i++) {
+        E e = get(index);
+        for (int i = index; i < count; i++)
             v[i] = v[i + 1];
-        }
+
         count--;
-        return o;
+        return e;
     }
 
     @Override
-    public int indexOf(E e) {
-        for (int i = 0; i < count; i++) {
-            if (v[i].equals(e)) return i;
-        }
+    public int indexOf(Object o) {
+        for (int i = 0; i < count; i++)
+            if (v[i].equals(o)) return i;
         return -1;
     }
 
     // TODO
     @Override
-    public int lastIndexOf(E e) {
+    public int lastIndexOf(Object o) {
         return 0;
     }
 
     // TODO
     @Override
-    public ListIterator listIterator() {
+    public ListIterator<E> listIterator() {
         return null;
     }
 
     // TODO
     @Override
-    public ListIterator listIterator(int index) {
+    public ListIterator<E> listIterator(int index) {
         return null;
     }
 
     // TODO
     @Override
-    public List subList(int fromIndex, int toIndex) {
-        return null;
-    }
-
-    // TODO
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    // TODO
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    // TODO
-    @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-    // TODO
-    @Override
-    public E[] toArray(E[] a) {
+    public Lista<E> subList(int fromIndex, int toIndex) {
         return null;
     }
 

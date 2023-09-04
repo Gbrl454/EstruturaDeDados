@@ -1,22 +1,24 @@
 package gbrl.unifor.collections;
 
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 public class LinkedLista<E> extends AbstractLista<E> {
-    private Node primeiro;
-    private Node ultimo;
+    private Node<E> primeiro;
+    private Node<E> ultimo;
 
-    // TODO
     @Override
     public boolean contains(Object o) {
+        Node<E> atual = primeiro;
+        while (atual != null) {
+            if (atual.item == o) return true;
+            atual = atual.proximo;
+        }
         return false;
     }
 
     @Override
     public boolean add(E e) {
-        LinkedLista.Node novo = new LinkedLista.Node(e);
+        Node novo = new Node(e);
 
         if (primeiro == null) primeiro = novo;
         else {
@@ -29,15 +31,52 @@ public class LinkedLista<E> extends AbstractLista<E> {
         return true;
     }
 
-    // TODO
     @Override
     public boolean remove(Object o) {
         return false;
     }
 
     @Override
+    public boolean addAll(Collection<? extends E> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends E> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public E get(int index) {
+        return null;
+    }
+
+    @Override
+    public void add(int index, E element) {
+    }
+
+    @Override
+    public E remove(int index) {
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return -1;
+    }
+
+    @Override
     public String toString() {
-        Node atual = primeiro;
+        Node<E> atual = primeiro;
         String str = "[";
         while (atual != null) {
             str += (atual.proximo == null) ? atual.item : atual.item + ", ";

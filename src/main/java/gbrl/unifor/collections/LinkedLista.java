@@ -1,8 +1,26 @@
 package gbrl.unifor.collections;
 
+import java.util.Collection;
+
 public class LinkedLista<E> extends AbstractLista<E> {
     private Node<E> primeiro;
     private Node<E> ultimo;
+
+    public LinkedLista() {
+        novo();
+    }
+
+    public LinkedLista(Collection<? extends E> c) {
+        novo();
+        if (!c.isEmpty())
+            addAll(c);
+    }
+
+    private void novo() {
+        primeiro = null;
+        ultimo = null;
+        count = 0;
+    }
 
     @Override
     public boolean contains(Object o) {

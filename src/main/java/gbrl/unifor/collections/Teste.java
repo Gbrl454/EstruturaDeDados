@@ -8,12 +8,10 @@ public class Teste {
         linkedList.add("A");
         linkedList.add("B");
         linkedList.add("C");
-        System.out.println(linkedList.indexOf("A"));
+        System.out.println(linkedList);
 
-        LinkedLista<String> linkedLista = new LinkedLista<>();
-        linkedLista.add("A");
-        linkedLista.add("B");
-        linkedLista.add("C");
-        System.out.println(linkedLista.indexOf("A"));
+        LinkedLista<String> linkedLista = new LinkedLista<>(linkedList);
+
+        System.out.println(linkedLista);
     }
 }

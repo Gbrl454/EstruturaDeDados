@@ -91,6 +91,11 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public int indexOf(Object o) {
+        Node<E> atual = primeiro;
+        for (int i = 0; i < count; i++) {
+            if (get(i) == o) return i;
+            atual = atual.proximo;
+        }
         return -1;
     }
 

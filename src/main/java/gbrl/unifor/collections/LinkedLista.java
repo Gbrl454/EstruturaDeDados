@@ -66,6 +66,26 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public E remove(int index) {
+        if (index < 0 || index > count)
+            return null;
+
+        Node<E> atual = primeiro;
+        for (int i = 0; i < count; i++) {
+            if (i == index) {
+                Node<E> anterior = atual.anterior;
+                if (anterior != null)
+                    anterior.proximo = atual.proximo;
+
+                Node<E> proximo = atual.proximo;
+                if (proximo != null)
+                    proximo.anterior = atual.anterior;
+
+                count--;
+                return atual.item;
+            }
+            atual = atual.proximo;
+        }
+
         return null;
     }
 

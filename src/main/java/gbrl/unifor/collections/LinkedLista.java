@@ -53,6 +53,9 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public void clear() {
+        primeiro = null;
+        ultimo = null;
+        count = 0;
     }
 
     @Override

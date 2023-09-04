@@ -49,44 +49,6 @@ public class ArrayLista<E> extends AbstractLista<E> {
     }
 
     @Override
-    public boolean add(E e) {
-        add(count, e);
-        return true;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        if (!contains(o))
-            return false;
-        remove(indexOf(o));
-        return true;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        addAll(count, c);
-        return true;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        ArrayLista<E> lista = new ArrayLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < lista.size(); i++)
-            add(index + i, lista.get(i));
-        return true;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        ArrayLista lista = new ArrayLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < c.size(); i++)
-            remove(lista.get(i));
-        return true;
-    }
-
-    @Override
     public void clear() {
         v = (E[]) new Object[this.initialCapacity];
         count = 0;
@@ -95,7 +57,7 @@ public class ArrayLista<E> extends AbstractLista<E> {
     @Override
     public E get(int index) {
         if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException("Índice " + index + " fora dos limites para comprimento " + count);
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
         return v[index];
     }
 

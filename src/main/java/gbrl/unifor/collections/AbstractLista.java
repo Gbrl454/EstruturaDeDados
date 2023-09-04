@@ -29,11 +29,24 @@ public abstract class AbstractLista<E> implements Lista<E> {
         return new Object[0];
     }
 
-
     // TODO
     @Override
     public <T> T[] toArray(T[] a) {
         return null;
+    }
+
+    @Override
+    public boolean add(E e) {
+        add(count, e);
+        return true;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        if (!contains(o))
+            return false;
+        remove(indexOf(o));
+        return true;
     }
 
     // TODO
@@ -42,22 +55,28 @@ public abstract class AbstractLista<E> implements Lista<E> {
         return false;
     }
 
-    // TODO
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        addAll(count, c);
+        return true;
     }
 
-    // TODO
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
+        ArrayLista<E> lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < lista.size(); i++)
+            add(index + i, lista.get(i));
+        return true;
     }
 
-    // TODO
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        ArrayLista lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < c.size(); i++)
+            remove(lista.get(i));
+        return true;
     }
 
     // TODO
@@ -68,38 +87,8 @@ public abstract class AbstractLista<E> implements Lista<E> {
 
     // TODO
     @Override
-    public void clear() {
-
-    }
-
-    // TODO
-    @Override
-    public E get(int index) {
-        return null;
-    }
-
-    // TODO
-    @Override
     public E set(int index, E element) {
         return null;
-    }
-
-    // TODO
-    @Override
-    public void add(int index, E element) {
-
-    }
-
-    // TODO
-    @Override
-    public E remove(int index) {
-        return null;
-    }
-
-    // TODO
-    @Override
-    public int indexOf(Object o) {
-        return 0;
     }
 
     // TODO

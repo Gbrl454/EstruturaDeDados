@@ -1,7 +1,5 @@
 package gbrl.unifor.collections;
 
-import java.util.Collection;
-
 public class LinkedLista<E> extends AbstractLista<E> {
     private Node<E> primeiro;
     private Node<E> ultimo;
@@ -17,41 +15,6 @@ public class LinkedLista<E> extends AbstractLista<E> {
     }
 
     @Override
-    public boolean add(E e) {
-        Node novo = new Node(e);
-
-        if (primeiro == null) primeiro = novo;
-        else {
-            ultimo.proximo = novo;
-            novo.anterior = ultimo;
-        }
-
-        ultimo = novo;
-        count++;
-        return true;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
     public void clear() {
         primeiro = null;
         ultimo = null;
@@ -60,11 +23,45 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public E get(int index) {
+        if (index < 0 || index >= count)
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
+
+        Node<E> atual = primeiro;
+        for (int i = 0; i < count; i++) {
+            if (i == index) return atual.item;
+            atual = atual.proximo;
+        }
         return null;
     }
 
     @Override
     public void add(int index, E element) {
+        if (index < 0 || index > count)
+            throw new IndexOutOfBoundsException("Índice: " + index + ", Comprimento: " + count);
+
+        Node<E> novo = new Node<>(element);
+
+        if (index == 0) {
+            primeiro = novo;
+            ultimo = novo;
+            count++;
+        } else if (index == count) {
+            novo.anterior = ultimo;
+            ultimo.proximo = novo;
+            ultimo = novo;
+            count++;
+        } else {
+            Node<E> atual = primeiro;
+            for (int i = 0; i < count; i++) {
+                if (i == (index - 1)) {
+                    atual.proximo.anterior = novo;
+                    atual.proximo = novo;
+                    count++;
+                    return;
+                }
+                atual = atual.proximo;
+            }
+        }
     }
 
     @Override

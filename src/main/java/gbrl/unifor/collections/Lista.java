@@ -46,9 +46,9 @@ public interface Lista<E> {
 
     boolean containsAll(Collection<?> c);
 
-    boolean addAll(Collection<? extends E> c);
+    boolean addAll(Collection<E> c);
 
-    boolean addAll(int index, Collection<? extends E> c);
+    boolean addAll(int index, Collection<E> c);
 
     boolean removeAll(Collection<?> c);
 

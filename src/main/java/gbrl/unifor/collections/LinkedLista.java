@@ -10,7 +10,7 @@ public class LinkedLista<E> extends AbstractLista<E> {
         novo();
     }
 
-    public LinkedLista(Collection<? extends E> c) {
+    public LinkedLista(Collection<E> c) {
         novo();
         if (!c.isEmpty())
             addAll(c);
@@ -23,13 +23,21 @@ public class LinkedLista<E> extends AbstractLista<E> {
     }
 
     @Override
-    public boolean contains(Object o) {
-        Node<E> atual = primeiro;
-        while (atual != null) {
-            if (atual.item == o) return true;
-            atual = atual.proximo;
-        }
-        return false;
+    public boolean addAll(int index, Collection<E> c) {
+        LinkedLista<E> lista = new LinkedLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < lista.size(); i++)
+            add(index + i, lista.get(i));
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        LinkedLista lista = new LinkedLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < c.size(); i++)
+            remove(lista.get(i));
+        return true;
     }
 
     @Override
@@ -109,10 +117,10 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public int indexOf(Object o) {
-        Node<E> atual = primeiro;
-        for (int i = 0; i < count; i++) {
-            if (get(i) == o) return i;
-            atual = atual.proximo;
+        int index = 0;
+        for (Node<E> x = primeiro; x != null; x = x.proximo) {
+            if (o.equals(x.item)) return index;
+            index++;
         }
         return -1;
     }

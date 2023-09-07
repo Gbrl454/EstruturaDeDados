@@ -1,7 +1,5 @@
 package gbrl.unifor.collections;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 @SuppressWarnings("unchecked")
@@ -24,10 +22,10 @@ public class ArrayLista<E> extends AbstractLista<E> {
         clear();
     }
 
-    public ArrayLista(Collection<? extends E> c) {
-        Object[] objs = c.toArray();
+    public ArrayLista(Collection<E> c) {
+        E[] objs = (E[]) c.toArray();
         if ((count = objs.length) != 0)
-            v = (c.getClass() == ArrayList.class) ? ((E[]) objs) : ((E[]) Arrays.copyOf(objs, count, Object[].class));
+            v = objs;
         else
             novo();
     }
@@ -42,10 +40,21 @@ public class ArrayLista<E> extends AbstractLista<E> {
     }
 
     @Override
-    public boolean contains(Object o) {
-        for (int i = 0; i < count; i++)
-            if (v[i].equals(o)) return true;
-        return false;
+    public boolean addAll(int index, Collection<E> c) {
+        ArrayLista<E> lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < lista.size(); i++)
+            add(index + i, lista.get(i));
+        return true;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        ArrayLista lista = new ArrayLista<>(c);
+        if (lista.size() == 0) return false;
+        for (int i = 0; i < c.size(); i++)
+            remove(lista.get(i));
+        return true;
     }
 
     @Override

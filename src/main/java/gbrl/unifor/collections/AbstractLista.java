@@ -17,6 +17,11 @@ public abstract class AbstractLista<E> implements Lista<E> {
         return count == 0;
     }
 
+    @Override
+    public boolean contains(Object o) {
+        return indexOf(o) >= 0;
+    }
+
     // TODO
     @Override
     public Iterator<E> iterator() {
@@ -56,26 +61,8 @@ public abstract class AbstractLista<E> implements Lista<E> {
     }
 
     @Override
-    public boolean addAll(Collection<? extends E> c) {
+    public boolean addAll(Collection<E> c) {
         addAll(count, c);
-        return true;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        ArrayLista<E> lista = new ArrayLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < lista.size(); i++)
-            add(index + i, lista.get(i));
-        return true;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        ArrayLista lista = new ArrayLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < c.size(); i++)
-            remove(lista.get(i));
         return true;
     }
 

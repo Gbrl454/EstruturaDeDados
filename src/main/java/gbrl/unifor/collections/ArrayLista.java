@@ -1,6 +1,7 @@
 package gbrl.unifor.collections;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 @SuppressWarnings("unchecked")
 public class ArrayLista<E> extends AbstractLista<E> {
@@ -55,6 +56,24 @@ public class ArrayLista<E> extends AbstractLista<E> {
         for (int i = 0; i < c.size(); i++)
             remove(lista.get(i));
         return true;
+    }
+
+    @Override
+    public void sort(Comparator<E> c) {
+        if (c == null) c = (Comparator<E>) Comparator.naturalOrder();
+
+        boolean swapped;
+        do {
+            swapped = false;
+            for (int i = 1; i < count; i++) {
+                if (c.compare(v[i - 1], v[i]) > 0) {
+                    E temp = v[i - 1];
+                    v[i - 1] = v[i];
+                    v[i] = temp;
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
 
     @Override
@@ -116,4 +135,3 @@ public class ArrayLista<E> extends AbstractLista<E> {
         return str += "]";
     }
 }
-

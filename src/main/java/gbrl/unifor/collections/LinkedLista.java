@@ -1,6 +1,7 @@
 package gbrl.unifor.collections;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 public class LinkedLista<E> extends AbstractLista<E> {
     private Node<E> primeiro;
@@ -38,6 +39,11 @@ public class LinkedLista<E> extends AbstractLista<E> {
         for (int i = 0; i < c.size(); i++)
             remove(lista.get(i));
         return true;
+    }
+
+    // TODO
+    @Override
+    public void sort(Comparator<E> c) {
     }
 
     @Override
@@ -94,6 +100,24 @@ public class LinkedLista<E> extends AbstractLista<E> {
     public E remove(int index) {
         if (index < 0 || index > count)
             return null;
+
+        if (index == 0) {
+            E ret = primeiro.item;
+            Node<E> prox = primeiro.proximo;
+            if (prox != null)
+                prox.anterior = null;
+            primeiro = primeiro.proximo;
+            count--;
+            return ret;
+        }
+
+        if (index == count - 1) {
+            E ret = ultimo.item;
+            ultimo.anterior.proximo = null;
+            ultimo = ultimo.anterior;
+            count--;
+            return ret;
+        }
 
         Node<E> atual = primeiro;
         for (int i = 0; i < count; i++) {
@@ -152,4 +176,3 @@ public class LinkedLista<E> extends AbstractLista<E> {
         }
     }
 }
-

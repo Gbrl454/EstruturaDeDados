@@ -112,7 +112,7 @@ public class ArrayLista<E> extends AbstractLista<E> {
             return null;
 
         E e = get(index);
-        for (int i = index; i < count; i++)
+        for (int i = index; i < count-1; i++)
             v[i] = v[i + 1];
 
         count--;

@@ -6,7 +6,7 @@ public class ListaEncadeadaOrdenada<E extends Comparable<E>> {
     private int count = 0;
 
     public ListaEncadeadaOrdenada() {
-        novo();
+        clear();
     }
 
     public E get(int index) {
@@ -25,7 +25,7 @@ public class ListaEncadeadaOrdenada<E extends Comparable<E>> {
         return count;
     }
 
-    private void novo() {
+    public void clear() {
         primeiro = null;
         ultimo = null;
         count = 0;
@@ -70,6 +70,31 @@ public class ListaEncadeadaOrdenada<E extends Comparable<E>> {
         return indexOf(o) >= 0;
     }
 
+    public void remove(int index) {
+        if (index == 0) {
+            if (count > 1) {
+                primeiro.proximo.anterior = null;
+                primeiro = primeiro.proximo;
+                count--;
+            } else clear();
+        } else if (index == count - 1) {
+            ultimo.anterior.proximo = null;
+            ultimo = ultimo.anterior;
+            count--;
+        } else {
+            int idx = 0;
+            for (Node<E> x = primeiro; x != null; x = x.proximo) {
+                if (idx == index) {
+                    x.proximo.anterior = x.anterior;
+                    x.anterior.proximo = x.proximo;
+                    count--;
+                    return;
+                }
+                idx++;
+            }
+        }
+    }
+
     public int indexOf(Object o) {
         int index = 0;
         for (Node<E> x = primeiro; x != null; x = x.proximo) {
@@ -88,6 +113,10 @@ public class ListaEncadeadaOrdenada<E extends Comparable<E>> {
             atual = atual.proximo;
         }
         return str + "]";
+    }
+
+    public boolean isEmpty() {
+        return count == 0;
     }
 
     private static class Node<E> {

@@ -1,15 +1,18 @@
 package gbrl.unifor.collections;
 
+import java.util.ArrayList;
+
 public class Teste {
     public static void main(String[] args) {
-        LinkedHashSeta<String> listaOrdenada = new LinkedHashSeta<>();
-        listaOrdenada.add("Abacaxi");
-        listaOrdenada.add("Abacaxi");
-        listaOrdenada.add("Abacaxi");
-        listaOrdenada.add("Maracuja");
-        listaOrdenada.add("Manga");
-        listaOrdenada.add("Banana");
-        System.out.println(listaOrdenada);
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Abacaxi");
+        lista.add("Abacaxi");
+        lista.add("Abacaxi");
+        lista.add("Maracuja");
+        lista.add("Manga");
+        lista.add("Banana");
+        LinkedLista linkedLista = new LinkedLista<>();
+        System.out.println(linkedLista);
 
     }
 }

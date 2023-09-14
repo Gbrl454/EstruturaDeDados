@@ -1,12 +1,28 @@
 package gbrl.unifor.collections;
 
-public class LinkedHashSeta<E> {
+public class ListaEncadeadaOrdenada<E extends Comparable<E>> {
     private Node<E> primeiro;
     private Node<E> ultimo;
     private int count = 0;
 
-    public LinkedHashSeta() {
+    public ListaEncadeadaOrdenada() {
         novo();
+    }
+
+    public E get(int index) {
+        if (index < 0 || index >= count)
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
+
+        Node<E> atual = primeiro;
+        for (int i = 0; i < count; i++) {
+            if (i == index) return atual.item;
+            atual = atual.proximo;
+        }
+        return null;
+    }
+
+    public int size() {
+        return count;
     }
 
     private void novo() {
@@ -24,23 +40,27 @@ public class LinkedHashSeta<E> {
         if (primeiro == null) {
             primeiro = novo;
             ultimo = novo;
-        } else if (novo.compareTo(primeiro) < 0) {
+            count++;
+        } else if (novo.item.compareTo(primeiro.item) < 0) {
             novo.proximo = primeiro;
             primeiro.anterior = novo;
             primeiro = novo;
-        } else if (novo.compareTo(ultimo) > 0) {
+            count++;
+        } else if (novo.item.compareTo(ultimo.item) > 0) {
             ultimo.proximo = novo;
             novo.anterior = ultimo;
             ultimo = novo;
+            count++;
         } else {
             Node<E> aux = primeiro;
 
-            while (aux != null && ((novo.compareTo(aux)) >= 0)) aux = aux.proximo;
+            while (aux != null && ((novo.item.compareTo(aux.item)) >= 0)) aux = aux.proximo;
 
             novo.anterior = aux.anterior;
             aux.anterior.proximo = novo;
             novo.proximo = aux;
             aux.anterior = novo;
+            count++;
         }
 
         return true;
@@ -70,31 +90,13 @@ public class LinkedHashSeta<E> {
         return str + "]";
     }
 
-    private static class Node<E> implements Comparable<Node<E>> {
+    private static class Node<E> {
         E item;
         Node<E> anterior;
         Node<E> proximo;
 
         Node(E item) {
             this.item = item;
-        }
-
-        @Override
-        public int compareTo(Node<E> o) {
-            String obj = objToAscii(o.item);
-            String itm = objToAscii(item);
-            return itm.compareTo(obj);
-        }
-
-        private String objToAscii(E item) {
-            String input = item.toString();
-            String ascii = "";
-
-            for (int i = 0; i < input.length(); i++) {
-                ascii += input.charAt(i) + " ";
-            }
-
-            return ascii;
         }
     }
 }

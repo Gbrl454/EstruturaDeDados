@@ -11,11 +11,11 @@ public class LinkedLista<E> extends AbstractLista<E> {
         novo();
     }
 
-    public LinkedLista(Collection<E> c) {
-        novo();
-        if (!c.isEmpty())
-            addAll(c);
-    }
+   // public LinkedLista(Collection<E> c) {
+   //     novo();
+   //     if (!c.isEmpty())
+   //         addAll(c);
+   // }
 
     private void novo() {
         primeiro = null;
@@ -25,20 +25,22 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public boolean addAll(int index, Collection<E> c) {
-        LinkedLista<E> lista = new LinkedLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < lista.size(); i++)
-            add(index + i, lista.get(i));
-        return true;
+   //     LinkedLista<E> lista = new LinkedLista<>(c);
+   //     if (lista.size() == 0) return false;
+   //     for (int i = 0; i < lista.size(); i++)
+   //         add(index + i, lista.get(i));
+   //     return true;
+        return false;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        LinkedLista lista = new LinkedLista<>(c);
-        if (lista.size() == 0) return false;
-        for (int i = 0; i < c.size(); i++)
-            remove(lista.get(i));
-        return true;
+    //    LinkedLista lista = new LinkedLista<>(c);
+    //    if (lista.size() == 0) return false;
+    //    for (int i = 0; i < c.size(); i++)
+    //        remove(lista.get(i));
+    //    return true;
+        return false;
     }
 
     // TODO

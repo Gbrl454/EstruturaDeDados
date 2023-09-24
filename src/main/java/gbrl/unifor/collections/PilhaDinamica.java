@@ -21,11 +21,15 @@ public class PilhaDinamica<E> {
     }
 
     public E pop() {
-        count--;
-        Node<E> topo = this.topo;
-        this.topo = topo.anterior;
-        this.topo.proximo = null;
-        return topo.item;
+        if (size() == 1) clear();
+        else {
+            count--;
+            Node<E> topo = this.topo;
+            this.topo = topo.anterior;
+            this.topo.proximo = null;
+            return topo.item;
+        }
+        return null;
     }
 
     public boolean isEmpty() {

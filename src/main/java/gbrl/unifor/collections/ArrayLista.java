@@ -1,10 +1,11 @@
 package gbrl.unifor.collections;
 
+
 import java.util.Collection;
 import java.util.Comparator;
 
 @SuppressWarnings("unchecked")
-public class ArrayLista<E> extends AbstractLista<E> {
+public class ArrayLista<E> extends AbstrataLista<E> {
     private int initialCapacity;
     private E[] v;
 
@@ -112,7 +113,7 @@ public class ArrayLista<E> extends AbstractLista<E> {
             return null;
 
         E e = get(index);
-        for (int i = index; i < count-1; i++)
+        for (int i = index; i < count - 1; i++)
             v[i] = v[i + 1];
 
         count--;
@@ -122,6 +123,13 @@ public class ArrayLista<E> extends AbstractLista<E> {
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < count; i++)
+            if (v[i].equals(o)) return i;
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        for (int i = count; i >= 0; i--)
             if (v[i].equals(o)) return i;
         return -1;
     }

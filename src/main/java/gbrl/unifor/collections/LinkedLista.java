@@ -3,7 +3,7 @@ package gbrl.unifor.collections;
 import java.util.Collection;
 import java.util.Comparator;
 
-public class LinkedLista<E> extends AbstractLista<E> {
+public class LinkedLista<E> extends AbstrataLista<E> {
     private Node<E> primeiro;
     private Node<E> ultimo;
 
@@ -11,11 +11,11 @@ public class LinkedLista<E> extends AbstractLista<E> {
         novo();
     }
 
-   // public LinkedLista(Collection<E> c) {
-   //     novo();
-   //     if (!c.isEmpty())
-   //         addAll(c);
-   // }
+    // public LinkedLista(Collection<E> c) {
+    //     novo();
+    //     if (!c.isEmpty())
+    //         addAll(c);
+    // }
 
     private void novo() {
         primeiro = null;
@@ -25,21 +25,21 @@ public class LinkedLista<E> extends AbstractLista<E> {
 
     @Override
     public boolean addAll(int index, Collection<E> c) {
-   //     LinkedLista<E> lista = new LinkedLista<>(c);
-   //     if (lista.size() == 0) return false;
-   //     for (int i = 0; i < lista.size(); i++)
-   //         add(index + i, lista.get(i));
-   //     return true;
+        //     LinkedLista<E> lista = new LinkedLista<>(c);
+        //     if (lista.size() == 0) return false;
+        //     for (int i = 0; i < lista.size(); i++)
+        //         add(index + i, lista.get(i));
+        //     return true;
         return false;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-    //    LinkedLista lista = new LinkedLista<>(c);
-    //    if (lista.size() == 0) return false;
-    //    for (int i = 0; i < c.size(); i++)
-    //        remove(lista.get(i));
-    //    return true;
+        //    LinkedLista lista = new LinkedLista<>(c);
+        //    if (lista.size() == 0) return false;
+        //    for (int i = 0; i < c.size(); i++)
+        //        remove(lista.get(i));
+        //    return true;
         return false;
     }
 
@@ -149,6 +149,12 @@ public class LinkedLista<E> extends AbstractLista<E> {
             index++;
         }
         return -1;
+    }
+
+    // TODO
+    @Override
+    public int lastIndexOf(Object o) {
+        return 0;
     }
 
     @Override

@@ -1,14 +1,39 @@
 package gbrl.unifor.collections.pilhas;
 
 import gbrl.unifor.collections.abstracts.ColecaoA;
+import gbrl.unifor.collections.interfaces.ColecaoI;
 import gbrl.unifor.collections.interfaces.PilhaI;
 
 import java.util.EmptyStackException;
 
 public class PilhaEstatica<E> extends ColecaoA<E> implements PilhaI<E> {
     private E[] elements;
+    private int initialCapacity;
 
     public PilhaEstatica() {
+        novo();
+    }
+
+    public PilhaEstatica(int initialCapacity) {
+        if (initialCapacity > 0)
+            this.initialCapacity = initialCapacity;
+        else if (initialCapacity == 0)
+            this.initialCapacity = 10;
+        else
+            throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
+
+        clear();
+    }
+
+    public PilhaEstatica(ColecaoI<E> c) {
+        E[] objs = c.toArray();
+        if ((count = objs.length) != 0)
+            elements = objs;
+        else novo();
+    }
+
+    private void novo() {
+        this.initialCapacity = 10;
         clear();
     }
 
@@ -23,7 +48,7 @@ public class PilhaEstatica<E> extends ColecaoA<E> implements PilhaI<E> {
 
     @Override
     public void clear() {
-        elements = (E[]) new Object[10];
+        elements = (E[]) new Object[this.initialCapacity];
         count = -1;
     }
 

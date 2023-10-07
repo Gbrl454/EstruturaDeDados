@@ -4,7 +4,7 @@ import gbrl.unifor.collections.abstracts.ListaA;
 import gbrl.unifor.collections.interfaces.ColecaoI;
 
 public class ListaEstatica<E> extends ListaA<E> {
-    private E[] vector;
+    private E[] elements;
     private int initialCapacity;
 
     public ListaEstatica() {
@@ -25,9 +25,8 @@ public class ListaEstatica<E> extends ListaA<E> {
     public ListaEstatica(ColecaoI<E> c) {
         E[] objs = c.toArray();
         if ((count = objs.length) != 0)
-            vector = objs;
-        else
-            novo();
+            elements = objs;
+        else novo();
     }
 
     private void novo() {
@@ -36,25 +35,25 @@ public class ListaEstatica<E> extends ListaA<E> {
     }
 
     private E[] plusArray() {
-        return (E[]) new Object[vector.length * 2];
+        return (E[]) new Object[elements.length * 2];
     }
 
     @Override
     public void clear() {
-        vector = (E[]) new Object[this.initialCapacity];
+        elements = (E[]) new Object[this.initialCapacity];
         count = 0;
     }
 
     @Override
     public E[] toArray() {
-        return vector.clone();
+        return elements.clone();
     }
 
     @Override
     public E get(int index) {
         if (index < 0 || index >= count)
             throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
-        return vector[index];
+        return elements[index];
     }
 
     @Override
@@ -62,14 +61,14 @@ public class ListaEstatica<E> extends ListaA<E> {
         if (index < 0 || index > count)
             throw new IndexOutOfBoundsException("Índice: " + index + ", Comprimento: " + count);
 
-        if (count == vector.length) {
+        if (count == elements.length) {
             E[] vAux = plusArray();
-            System.arraycopy(vector, 0, vAux, 0, index);
-            System.arraycopy(vector, index, vAux, index + 1, count - index);
-            vector = vAux;
-        } else System.arraycopy(vector, index, vector, index + 1, count - index);
+            System.arraycopy(elements, 0, vAux, 0, index);
+            System.arraycopy(elements, index, vAux, index + 1, count - index);
+            elements = vAux;
+        } else System.arraycopy(elements, index, elements, index + 1, count - index);
 
-        vector[index] = element;
+        elements[index] = element;
         count++;
         return true;
     }
@@ -80,7 +79,7 @@ public class ListaEstatica<E> extends ListaA<E> {
 
         E e = get(index);
         for (int i = index; i < count - 1; i++)
-            vector[i] = vector[i + 1];
+            elements[i] = elements[i + 1];
 
         count--;
         return e;
@@ -89,14 +88,14 @@ public class ListaEstatica<E> extends ListaA<E> {
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < count; i++)
-            if (vector[i].equals(o)) return i;
+            if (elements[i].equals(o)) return i;
         return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
         for (int i = count; i >= 0; i--)
-            if (vector[i].equals(o)) return i;
+            if (elements[i].equals(o)) return i;
         return -1;
     }
 
@@ -104,15 +103,15 @@ public class ListaEstatica<E> extends ListaA<E> {
     public E set(int index, E element) {
         if (index < 0 || index >= count)
             throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
-        vector[index] = element;
-        return vector[index];
+        elements[index] = element;
+        return elements[index];
     }
 
     @Override
     public String toString() {
         String str = "[";
         for (int i = 0; i < size(); i++) {
-            str += (i != size() - 1) ? vector[i] + ", " : vector[i];
+            str += (i != size() - 1) ? elements[i] + ", " : elements[i];
         }
         return str += "]";
     }

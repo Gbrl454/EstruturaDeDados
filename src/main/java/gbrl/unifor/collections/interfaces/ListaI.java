@@ -9,7 +9,7 @@ public interface ListaI<E> extends ColecaoI<E> {
     /**
      * Insere um elemento em uma posição específica da lista.
      */
-    void add(int index, E element);
+    boolean add(int index, E element);
 
     /**
      * Remove o elemento na posição especificada.

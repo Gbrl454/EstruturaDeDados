@@ -1,12 +1,14 @@
 package gbrl.unifor.collections.abstracts;
 
 import gbrl.unifor.collections.util.Node;
-import gbrl.unifor.collections.interfaces.ColecaoI;
-import gbrl.unifor.collections.interfaces.ListaI;
 
-public abstract class ListaDinamicaA<E> extends ColecaoA<E> implements ListaI<E> {
+public abstract class ListaDinamicaA<E> extends ListaA<E> {
     protected Node<E> primeiro;
     protected Node<E> ultimo;
+
+    public ListaDinamicaA() {
+        clear();
+    }
 
     @Override
     public void clear() {
@@ -68,66 +70,6 @@ public abstract class ListaDinamicaA<E> extends ColecaoA<E> implements ListaI<E>
     }
 
     @Override
-    public E remove(Object o) {
-        return remove(indexOf(o));
-    }
-
-    @Override
-    public boolean removeAll(ColecaoI<? extends E> c) {
-        if (c.isEmpty()) return false;
-        boolean retAll = false;
-        for (int i = 0; i < c.size(); i++) {
-            E ret = remove(c.get(i));
-            retAll = (retAll) || (ret != null);
-        }
-        return retAll;
-    }
-
-    @Override
-    public E get(int index) {
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
-
-        Node<E> atual = primeiro;
-        for (int i = 0; i < count; i++) {
-            if (i == index) return atual.item;
-            atual = atual.proximo;
-        }
-        return null;
-    }
-
-    @Override
-    public boolean addAll(ColecaoI<? extends E> c) {
-        if (c.isEmpty()) return false;
-        boolean retAll = false;
-        for (int i = 0; i < c.size(); i++) {
-            boolean ret = add(c.get(i));
-            retAll = (retAll) || (ret);
-        }
-        return retAll;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return indexOf(o) >= 0;
-    }
-
-    @Override
-    public boolean containsAll(ColecaoI<? extends E> c) {
-        if (c.isEmpty()) return false;
-
-        boolean retAll = true;
-
-        for (int i = 0; i < c.size(); i++) {
-            boolean ret = contains(c.get(i));
-            if (!ret)
-                retAll = false;
-        }
-
-        return retAll;
-    }
-
-    @Override
     public int indexOf(Object o) {
         int index = 0;
         for (Node<E> x = primeiro; x != null; x = x.proximo) {
@@ -145,6 +87,19 @@ public abstract class ListaDinamicaA<E> extends ColecaoA<E> implements ListaI<E>
             index--;
         }
         return -1;
+    }
+
+    @Override
+    public E get(int index) {
+        if (index < 0 || index >= count)
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
+
+        Node<E> atual = primeiro;
+        for (int i = 0; i < count; i++) {
+            if (i == index) return atual.item;
+            atual = atual.proximo;
+        }
+        return null;
     }
 
     @Override

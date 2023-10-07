@@ -1,6 +1,6 @@
 package gbrl.unifor.listas.av1.lista2;
 
-import gbrl.unifor.collections.ArrayLista;
+import gbrl.unifor.collections.listas.ListaEstatica;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Q3135E {
     public static void main(String[] args) {
-        ArrayLista<String> nomes = new ArrayLista<>();
+        ListaEstatica<String> nomes = new ListaEstatica<>();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         final int min = 2;

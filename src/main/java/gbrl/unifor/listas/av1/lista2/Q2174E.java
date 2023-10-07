@@ -1,12 +1,12 @@
 package gbrl.unifor.listas.av1.lista2;
 
-import gbrl.unifor.collections.ArrayLista;
+import gbrl.unifor.collections.listas.ListaEstatica;
 
 import java.util.Scanner;
 
 public class Q2174E {
     public static void main(String[] args) {
-        ArrayLista<String> pomekons = new ArrayLista<>();
+        ListaEstatica<String> pomekons = new ListaEstatica<>();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
 

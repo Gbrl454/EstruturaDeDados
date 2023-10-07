@@ -1,12 +1,12 @@
 package gbrl.unifor.listas.av1.lista2;
 
-import gbrl.unifor.collections.LinkedLista;
+import gbrl.unifor.collections.listas.ListaDinamica;
 
 import java.util.Scanner;
 
 public class Q3135D {
     public static void main(String[] args) {
-        LinkedLista<String> nomes = new LinkedLista<>();
+        ListaDinamica<String> nomes = new ListaDinamica<>();
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         final int min = 2;

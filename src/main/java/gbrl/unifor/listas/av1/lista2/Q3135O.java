@@ -1,7 +1,7 @@
 package gbrl.unifor.listas.av1.lista2;
 
-import gbrl.unifor.collections.ArrayLista;
-import gbrl.unifor.collections.ListaEncadeadaOrdenada;
+import gbrl.unifor.collections.listas.ListaDinamicaOrdenada;
+import gbrl.unifor.collections.listas.ListaEstatica;
 
 import java.util.Scanner;
 
@@ -12,8 +12,8 @@ public class Q3135O {
         int n = scanner.nextInt();
         scanner.nextLine();
 
-        ArrayLista<ListaEncadeadaOrdenada<String>> nomesPorTamanho = new ArrayLista<>();
-        for (int i = 0; i < 20; i++) nomesPorTamanho.add(new ListaEncadeadaOrdenada<>());
+        ListaEstatica<ListaDinamicaOrdenada<String>> nomesPorTamanho = new ListaEstatica<>();
+        for (int i = 0; i < 20; i++) nomesPorTamanho.add(new ListaDinamicaOrdenada<>());
 
         for (int i = 0; i < n; i++) {
             String nome = scanner.next();
@@ -22,7 +22,7 @@ public class Q3135O {
 
 
         while (!nomesPorTamanho.isEmpty()) {
-            ArrayLista<String> list = new ArrayLista<>();
+            ListaEstatica<String> list = new ListaEstatica<>();
             for (int i = 0; i < nomesPorTamanho.size(); i++) {
                 if (nomesPorTamanho.get(i).isEmpty()) {
                     nomesPorTamanho.remove(i);

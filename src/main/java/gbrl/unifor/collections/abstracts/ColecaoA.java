@@ -7,7 +7,7 @@ public abstract class ColecaoA<E> implements ColecaoI<E> {
 
     @Override
     public boolean isEmpty() {
-        return count == 0;
+        return size() == 0;
     }
 
     @Override

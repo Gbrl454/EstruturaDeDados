@@ -2,8 +2,8 @@ Coleção,Implementado,Testado
 Lista Estatica,Sim,Não
 Lista Dinamica,Sim,Não
 Lista Dinamica Ordenada,Sim,Não
-Pilha Estatica,Não,Não
-Pilha Dinamica,Não,Não
+Pilha Estatica,Sim,Não
+Pilha Dinamica,Sim,Não
 Fila Estatica,Não,Não
 Fila Dinamica,Não,Não
 Fila Dinamica Prioridade,Não,Não

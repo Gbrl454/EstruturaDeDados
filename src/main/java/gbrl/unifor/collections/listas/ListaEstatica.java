@@ -107,4 +107,13 @@ public class ListaEstatica<E> extends ListaA<E> {
         vector[index] = element;
         return vector[index];
     }
+
+    @Override
+    public String toString() {
+        String str = "[";
+        for (int i = 0; i < size(); i++) {
+            str += (i != size() - 1) ? vector[i] + ", " : vector[i];
+        }
+        return str += "]";
+    }
 }

@@ -19,8 +19,8 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
 
     @Override
     public E[] toArray() {
-        E[] array = (E[]) new Object[count - 1];
-        for (int i = 0; i < count; i++) {
+        E[] array = (E[]) new Object[size() - 1];
+        for (int i = 0; i < size(); i++) {
             array[i] = get(i);
         }
         return array;
@@ -28,11 +28,11 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
 
     @Override
     public E remove(int index) {
-        if (index < 0 || index > count)
+        if (index < 0 || index > size())
             return null;
 
         if (index == 0) {
-            if (count > 1) {
+            if (size() > 1) {
                 E ret = primeiro.item;
                 Node<E> prox = primeiro.proximo;
                 if (prox != null)
@@ -41,7 +41,7 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
                 count--;
                 return ret;
             } else clear();
-        } else if (index == count - 1) {
+        } else if (index == size() - 1) {
             E ret = ultimo.item;
             ultimo.anterior.proximo = null;
             ultimo = ultimo.anterior;
@@ -81,7 +81,7 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
 
     @Override
     public int lastIndexOf(Object o) {
-        int index = count;
+        int index = size();
         for (Node<E> x = ultimo; x != null; x = x.anterior) {
             if (o.equals(x.item)) return index;
             index--;
@@ -91,11 +91,11 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
 
     @Override
     public E get(int index) {
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
+        if (index < 0 || index >= size())
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + size());
 
         Node<E> atual = primeiro;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size(); i++) {
             if (i == index) return atual.item;
             atual = atual.proximo;
         }
@@ -104,11 +104,11 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
 
     @Override
     public E set(int index, E element) {
-        if (index < 0 || index >= count)
-            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + count);
+        if (index < 0 || index >= size())
+            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + size());
 
         Node<E> atual = primeiro;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < size(); i++) {
             if (i == index) {
                 atual.item = element;
                 return atual.item;

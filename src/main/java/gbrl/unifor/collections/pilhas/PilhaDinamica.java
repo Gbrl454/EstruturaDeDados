@@ -27,16 +27,13 @@ public class PilhaDinamica<E> extends ColecaoA<E> implements PilhaI<E> {
     @Override
     public E[] toArray() {
         E[] array = (E[]) new Object[size() - 1];
-        for (int i = 0; i < size(); i++) {
-            array[i] = get(i);
-        }
+        for (int i = 0; i < size(); i++) array[i] = get(i);
         return array;
     }
 
     @Override
     public E get(int index) {
-        if (index < 0 || index >= size())
-            throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + size());
+        if (index < 0 || index >= size()) throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + size());
 
         Node<E> atual = topo;
         for (int i = 0; i < size(); i++) {
@@ -62,17 +59,16 @@ public class PilhaDinamica<E> extends ColecaoA<E> implements PilhaI<E> {
 
     @Override
     public E pop() {
+        Node<E> top = this.topo;
         if (isEmpty()) throw new EmptyStackException();
-        else if (size() == 1) clear();
-        else {
-            count--;
-            Node<E> top = this.topo;
-            this.topo = top.anterior;
-            this.topo.proximo = null;
+        else if (size() == 1) {
+            clear();
             return top.item;
         }
-        return null;
-
+        count--;
+        this.topo = top.anterior;
+        this.topo.proximo = null;
+        return top.item;
     }
 
     @Override

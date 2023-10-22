@@ -15,20 +15,15 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
     }
 
     public FilaEstatica(int initialCapacity) {
-        if (initialCapacity > 0)
-            this.initialCapacity = initialCapacity;
-        else if (initialCapacity == 0)
-            this.initialCapacity = 10;
-        else
-            throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
-
+        if (initialCapacity > 0) this.initialCapacity = initialCapacity;
+        else if (initialCapacity == 0) this.initialCapacity = 10;
+        else throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
         clear();
     }
 
     public FilaEstatica(ColecaoI<E> c) {
         E[] objs = c.toArray();
-        if ((count = objs.length) != 0)
-            elements = objs;
+        if ((count = objs.length) != 0) elements = objs;
         else novo();
     }
 
@@ -65,19 +60,62 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public boolean enqueue(E element) {
-        // TODO
-        fim++;
-        elements[fim] = element;
-        return true;
+        if (!isEmpty()) {
+            if (fim < elements.length - 1) {
+                fim++;
+                elements[fim] = element;
+                count++;
+                return true;
+            }
+
+            if (inicio != 0) {
+                if (fim == inicio - 1) {
+                    System.out.println("iguais");
+                } else {
+                    fim++;
+                    elements[fim] = element;
+                    count++;
+                    return true;
+                }
+
+            } else {
+                System.out.println(elements.length);
+                E[] vAux = plusArray();
+                System.arraycopy(elements, 0, vAux, 0, size());
+                elements = vAux;
+                System.out.println(elements.length);
+                fim++;
+                elements[fim] = element;
+                count++;
+                return true;
+            }
+        } else {
+            fim++;
+            elements[fim] = element;
+            count++;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public E dequeue() {
+//        E ini = elements[inicio];
+//        elements[inicio] = null;
+//        inicio++;
+//        return ini;
         return elements[inicio++];
     }
 
     @Override
     public E peek() {
         return elements[inicio];
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (E element : elements) str += element + " | ";
+        return str += "";
     }
 }

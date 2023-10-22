@@ -4,7 +4,7 @@ public class Node<E> {
     public E item;
     public Node<E> anterior;
     public Node<E> proximo;
-    public int prioridade;
+    public Integer prioridade;
 
     public Node(E item) {
         this.item = item;

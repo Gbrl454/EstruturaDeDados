@@ -16,7 +16,4 @@ public interface FilaI<E> extends ColecaoI<E> {
      */
     E peek();
 
-
 }
-// /**Adiciona um elemento à fila com a prioridade especificada.*/
-// boolean enqueue(E element, int priority):

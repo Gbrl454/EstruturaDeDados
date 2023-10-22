@@ -15,20 +15,15 @@ public class PilhaEstatica<E> extends ColecaoA<E> implements PilhaI<E> {
     }
 
     public PilhaEstatica(int initialCapacity) {
-        if (initialCapacity > 0)
-            this.initialCapacity = initialCapacity;
-        else if (initialCapacity == 0)
-            this.initialCapacity = 10;
-        else
-            throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
-
+        if (initialCapacity > 0) this.initialCapacity = initialCapacity;
+        else if (initialCapacity == 0) this.initialCapacity = 10;
+        else throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
         clear();
     }
 
     public PilhaEstatica(ColecaoI<E> c) {
         E[] objs = c.toArray();
-        if ((count = objs.length) != 0)
-            elements = objs;
+        if ((count = objs.length) != 0) elements = objs;
         else novo();
     }
 
@@ -66,8 +61,12 @@ public class PilhaEstatica<E> extends ColecaoA<E> implements PilhaI<E> {
 
     @Override
     public E push(E item) {
+        if (elements.length == size()) {
+            E[] vAux = plusArray();
+            System.arraycopy(elements, 0, vAux, 0, size());
+            elements = vAux;
+        }
         count++;
-        if (elements.length < count) plusArray();
         elements[count] = item;
         return item;
     }
@@ -86,17 +85,14 @@ public class PilhaEstatica<E> extends ColecaoA<E> implements PilhaI<E> {
 
     @Override
     public int search(Object o) {
-        for (int i = 0; i < count; i++)
-            if (elements[i].equals(o)) return i;
+        for (int i = 0; i < count; i++) if (elements[i].equals(o)) return i;
         return -1;
     }
 
     @Override
     public String toString() {
         String str = "[";
-        for (int i = 0; i < size(); i++) {
-            str += (i != size() - 1) ? elements[i] + ", " : elements[i];
-        }
+        for (int i = 0; i < size(); i++) str += (i != size() - 1) ? elements[i] + ", " : elements[i];
         return str += "]";
     }
 }

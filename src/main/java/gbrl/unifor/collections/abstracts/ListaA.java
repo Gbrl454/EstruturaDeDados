@@ -11,8 +11,7 @@ public abstract class ListaA<E> extends ColecaoA<E> implements ListaI<E> {
 
     @Override
     public E remove(Object o) {
-        if (!contains(o))
-            return null;
+        if (!contains(o)) return null;
         return remove(indexOf(o));
     }
 
@@ -52,13 +51,11 @@ public abstract class ListaA<E> extends ColecaoA<E> implements ListaI<E> {
     @Override
     public boolean containsAll(ColecaoI<? extends E> c) {
         if (c.isEmpty()) return false;
-
         boolean retAll = true;
 
         for (int i = 0; i < c.size(); i++) {
             boolean ret = contains(c.get(i));
-            if (!ret)
-                retAll = false;
+            if (!ret) retAll = false;
         }
 
         return retAll;

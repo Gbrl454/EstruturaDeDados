@@ -20,23 +20,19 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
     @Override
     public E[] toArray() {
         E[] array = (E[]) new Object[size() - 1];
-        for (int i = 0; i < size(); i++) {
-            array[i] = get(i);
-        }
+        for (int i = 0; i < size(); i++) array[i] = get(i);
         return array;
     }
 
     @Override
     public E remove(int index) {
-        if (index < 0 || index > size())
-            return null;
+        if (index < 0 || index > size()) return null;
 
         if (index == 0) {
             if (size() > 1) {
                 E ret = primeiro.item;
                 Node<E> prox = primeiro.proximo;
-                if (prox != null)
-                    prox.anterior = null;
+                if (prox != null) prox.anterior = null;
                 primeiro = prox;
                 count--;
                 return ret;
@@ -53,12 +49,10 @@ public abstract class ListaDinamicaA<E> extends ListaA<E> {
                 if (idx == index) {
 
                     Node<E> anterior = x.anterior;
-                    if (anterior != null)
-                        anterior.proximo = x.proximo;
+                    if (anterior != null) anterior.proximo = x.proximo;
 
                     Node<E> proximo = x.proximo;
-                    if (proximo != null)
-                        proximo.anterior = x.anterior;
+                    if (proximo != null) proximo.anterior = x.anterior;
 
                     count--;
                     return x.item;

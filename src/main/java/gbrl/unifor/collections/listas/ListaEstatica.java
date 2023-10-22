@@ -12,20 +12,15 @@ public class ListaEstatica<E> extends ListaA<E> {
     }
 
     public ListaEstatica(int initialCapacity) {
-        if (initialCapacity > 0)
-            this.initialCapacity = initialCapacity;
-        else if (initialCapacity == 0)
-            this.initialCapacity = 10;
-        else
-            throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
-
+        if (initialCapacity > 0) this.initialCapacity = initialCapacity;
+        else if (initialCapacity == 0) this.initialCapacity = 10;
+        else throw new IllegalArgumentException("Capacidade Ilegal: " + initialCapacity);
         clear();
     }
 
     public ListaEstatica(ColecaoI<E> c) {
         E[] objs = c.toArray();
-        if ((count = objs.length) != 0)
-            elements = objs;
+        if ((count = objs.length) != 0) elements = objs;
         else novo();
     }
 
@@ -78,8 +73,7 @@ public class ListaEstatica<E> extends ListaA<E> {
         if (index < 0 || index > count) return null;
 
         E e = get(index);
-        for (int i = index; i < count - 1; i++)
-            elements[i] = elements[i + 1];
+        for (int i = index; i < count - 1; i++) elements[i] = elements[i + 1];
 
         count--;
         return e;
@@ -87,15 +81,13 @@ public class ListaEstatica<E> extends ListaA<E> {
 
     @Override
     public int indexOf(Object o) {
-        for (int i = 0; i < count; i++)
-            if (elements[i].equals(o)) return i;
+        for (int i = 0; i < count; i++) if (elements[i].equals(o)) return i;
         return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        for (int i = count; i >= 0; i--)
-            if (elements[i].equals(o)) return i;
+        for (int i = count; i >= 0; i--) if (elements[i].equals(o)) return i;
         return -1;
     }
 
@@ -110,9 +102,7 @@ public class ListaEstatica<E> extends ListaA<E> {
     @Override
     public String toString() {
         String str = "[";
-        for (int i = 0; i < size(); i++) {
-            str += (i != size() - 1) ? elements[i] + ", " : elements[i];
-        }
+        for (int i = 0; i < size(); i++) str += (i != size() - 1) ? elements[i] + ", " : elements[i];
         return str += "]";
     }
 }

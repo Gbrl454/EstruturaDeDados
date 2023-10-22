@@ -34,7 +34,6 @@ public class ListaDinamicaOrdenada<E extends Comparable<E>> extends ListaDinamic
             aux.anterior = novo;
             count++;
         }
-
         return true;
     }
 

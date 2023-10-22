@@ -67,10 +67,16 @@ public class FilaDinamicaPrioridade<E> extends ColecaoA<E> implements FilaI<E> {
 
             while (aux != null && ((novo.prioridade.compareTo(aux.prioridade)) >= 0)) aux = aux.proximo;
 
-            novo.anterior = aux.anterior;
-            aux.anterior.proximo = novo;
-            novo.proximo = aux;
-            aux.anterior = novo;
+            if (aux != null) {
+                novo.anterior = aux.anterior;
+                aux.anterior.proximo = novo;
+                novo.proximo = aux;
+                aux.anterior = novo;
+            } else {
+                novo.anterior = fim;
+                fim.proximo = novo;
+                fim = novo;
+            }
             count++;
         }
         return true;
@@ -78,8 +84,12 @@ public class FilaDinamicaPrioridade<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public E dequeue() {
-        if (inicio != null) {
-            Node<E> dado = inicio;
+        Node<E> dado = inicio;
+        if (size() == 1) {
+            clear();
+            count--;
+            return dado.item;
+        } else if (dado != null) {
             inicio = inicio.proximo;
             inicio.anterior = null;
             dado.proximo = null;
@@ -92,5 +102,16 @@ public class FilaDinamicaPrioridade<E> extends ColecaoA<E> implements FilaI<E> {
     @Override
     public E peek() {
         return inicio.item;
+    }
+
+    @Override
+    public String toString() {
+        Node<E> atual = fim;
+        String str = "[";
+        while (atual != null) {
+            str += atual.item + " (" + atual.prioridade + ")" + ((atual.anterior == null) ? "" : ", ");
+            atual = atual.anterior;
+        }
+        return str + "]";
     }
 }

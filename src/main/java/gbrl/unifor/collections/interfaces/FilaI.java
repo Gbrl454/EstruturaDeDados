@@ -15,5 +15,4 @@ public interface FilaI<E> extends ColecaoI<E> {
      * Retorna o elemento no início da fila sem removê-lo.
      */
     E peek();
-
 }

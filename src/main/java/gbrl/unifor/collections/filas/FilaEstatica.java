@@ -32,13 +32,12 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
         clear();
     }
 
-    private E[] plusArray() {
-        return (E[]) new Object[elements.length * 2];
-    }
-
-    @Override
-    public int size() {
-        return fim - inicio + 1;
+    private int plusArray() {
+        int size = size() - 1;
+        E[] vAux = (E[]) new Object[elements.length * 2];
+        System.arraycopy(elements, 0, vAux, 0, size);
+        elements = vAux;
+        return size;
     }
 
     @Override
@@ -60,50 +59,17 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public boolean enqueue(E element) {
-        if (!isEmpty()) {
-            if (fim < elements.length - 1) {
-                fim++;
-                elements[fim] = element;
-                count++;
-                return true;
-            }
-
-            if (inicio != 0) {
-                if (fim == inicio - 1) {
-                    System.out.println("iguais");
-                } else {
-                    fim++;
-                    elements[fim] = element;
-                    count++;
-                    return true;
-                }
-
-            } else {
-                System.out.println(elements.length);
-                E[] vAux = plusArray();
-                System.arraycopy(elements, 0, vAux, 0, size());
-                elements = vAux;
-                System.out.println(elements.length);
-                fim++;
-                elements[fim] = element;
-                count++;
-                return true;
-            }
-        } else {
-            fim++;
-            elements[fim] = element;
-            count++;
-            return true;
-        }
-        return false;
+        fim++;
+        if (fim == elements.length) fim = 0;
+        if (fim == inicio && size() > 1) fim = plusArray();
+        elements[fim] = element;
+        count++;
+        return true;
     }
 
     @Override
     public E dequeue() {
-//        E ini = elements[inicio];
-//        elements[inicio] = null;
-//        inicio++;
-//        return ini;
+        if (isEmpty()) return null;
         return elements[inicio++];
     }
 
@@ -114,8 +80,9 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public String toString() {
-        String str = "";
-        for (E element : elements) str += element + " | ";
-        return str += "";
+        int tam = size() - 1;
+        String str = "[";
+        for (int i = 0; i < tam; i++) str += (i != tam - 1) ? elements[i] + ", " : elements[i];
+        return str += "]";
     }
 }

@@ -5,23 +5,29 @@ import gbrl.unifor.collections.interfaces.FilaI;
 import gbrl.unifor.collections.util.Node;
 
 public class FilaDinamica<E> extends ColecaoA<E> implements FilaI<E> {
-    private Node<E> inicio;
-    private Node<E> fim;
+    protected Node<E> inicio;
+    protected Node<E> fim;
 
     public FilaDinamica() {
         clear();
     }
 
     @Override
+    public boolean isEmpty() {
+        return size() == -1;
+    }
+
+    @Override
     public void clear() {
         this.inicio = null;
         this.fim = null;
+        count = 0;
     }
 
     @Override
     public E[] toArray() {
-        E[] array = (E[]) new Object[size() - 1];
-        for (int i = 0; i < size(); i++) array[i] = get(i);
+        E[] array = (E[]) new Object[size()];
+        for (int i = 0; i < array.length; i++) array[i] = get(i);
         return array;
     }
 
@@ -29,6 +35,7 @@ public class FilaDinamica<E> extends ColecaoA<E> implements FilaI<E> {
     public E get(int index) {
         if (index < 0 || index >= size())
             throw new IndexOutOfBoundsException("Índice " + index + ", Comprimento " + size());
+
         Node<E> atual = inicio;
         for (int i = 0; i < size(); i++) {
             if (i == index) return atual.item;

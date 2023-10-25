@@ -32,8 +32,12 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
         clear();
     }
 
-    private E[] plusArray() {
-        return (E[]) new Object[elements.length * 2];
+    private int plusArray() {
+        int size = size() - 1;
+        E[] vAux = (E[]) new Object[elements.length * 2];
+        System.arraycopy(elements, 0, vAux, 0, size);
+        elements = vAux;
+        return size;
     }
 
     @Override
@@ -55,13 +59,17 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public boolean enqueue(E element) {
-        // TODO
-        return false;
+        fim++;
+        if (fim == elements.length) fim = 0;
+        if (fim == inicio && size() > 1) fim = plusArray();
+        elements[fim] = element;
+        count++;
+        return true;
     }
 
     @Override
     public E dequeue() {
-        count--;
+        if (isEmpty()) return null;
         return elements[inicio++];
     }
 
@@ -72,8 +80,9 @@ public class FilaEstatica<E> extends ColecaoA<E> implements FilaI<E> {
 
     @Override
     public String toString() {
-        String str = "";
-        for (E element : elements) str += element + " | ";
-        return str += "";
+        int tam = size() - 1;
+        String str = "[";
+        for (int i = 0; i < tam; i++) str += (i != tam - 1) ? elements[i] + ", " : elements[i];
+        return str += "]";
     }
 }
